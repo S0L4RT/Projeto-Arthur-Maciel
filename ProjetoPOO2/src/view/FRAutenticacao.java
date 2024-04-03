@@ -5,6 +5,8 @@
  */
 package view;
 
+import controller.UsuarioController;
+import utils.Utils;
 import javax.swing.JOptionPane;
 
 /**
@@ -138,7 +140,16 @@ public class FRAutenticacao extends javax.swing.JFrame {
             return;
         }
         // Autenticar
+        String senha = new String(txtSenha.getPassword());
         
+        String hash = Utils.calcularMD5(senha);
+
+        UsuarioController controller = new UsuarioController();
+        if(controller.autenticar(txtEmail.getText(), hash) == true){
+            // Logar
+            this.dispose();
+            new FRMenu().setVisible(true);
+        }
     }//GEN-LAST:event_btnEntrarMouseClicked
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
