@@ -5,7 +5,11 @@
  */
 package view;
 
+import controller.UsuarioController;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import model.Usuario;
+import utils.Utils;
 
 /**
  *
@@ -40,7 +44,7 @@ public class FRCadUsuario extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         txtSenha = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        ckbAtivo = new javax.swing.JCheckBox();
         txtDataNasc = new javax.swing.JFormattedTextField();
         btSalvar = new javax.swing.JButton();
         btCancelar = new javax.swing.JButton();
@@ -86,8 +90,8 @@ public class FRCadUsuario extends javax.swing.JDialog {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Data de Nascimento");
 
-        jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jCheckBox1.setText("Ativo");
+        ckbAtivo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ckbAtivo.setText("Ativo");
 
         txtDataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
@@ -151,7 +155,7 @@ public class FRCadUsuario extends javax.swing.JDialog {
                     .addGroup(painelLayout.createSequentialGroup()
                         .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jCheckBox1)))
+                        .addComponent(ckbAtivo)))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         painelLayout.setVerticalGroup(
@@ -181,7 +185,7 @@ public class FRCadUsuario extends javax.swing.JDialog {
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ckbAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,6 +238,24 @@ public class FRCadUsuario extends javax.swing.JDialog {
             return;
         }
         // Salvar no banco de dados
+        Usuario usu = new Usuario();
+        usu.setNome(txtNome.getText());
+        usu.setEmail(txtEmail.getText());
+        usu.setSenha(new String(txtSenha.getPassword()));
+        usu.setAtivo(ckbAtivo.isSelected());
+        
+        String senha = new String(txtSenha.getPassword());
+        senha = Utils.calcularMD5(senha);
+        usu.setSenha(senha);
+        usu.setAtivo(ckbAtivo.isSelected());
+        
+        Date data = Utils.converterStringToDate(txtDataNasc.getText());
+        usu.setDataNasc(data);
+        
+        UsuarioController controller = new UsuarioController();
+        if(controller.adicionarUsuario(usu)){
+            this.dispose();
+        }
     }//GEN-LAST:event_btSalvarMouseClicked
 
     private boolean verificaCampos(){
@@ -253,7 +275,7 @@ public class FRCadUsuario extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Campo 'Email' possui fomato inválido");
             return false;
         }
-        if(!txtDataNasc.getText().matches("^[0-9]{9}/[0-9]{2}/[0-9]{4}$")){
+        if(!txtDataNasc.getText().matches("^[0-9]{2}/[0-9]{2}/[0-9]{4}$")){
             JOptionPane.showMessageDialog(null, "Campo 'Data Nascimento' possui formato inválido" + " Ex: 01/01/2000");
             return false;
         }
@@ -312,7 +334,7 @@ public class FRCadUsuario extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btSalvar;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox ckbAtivo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
