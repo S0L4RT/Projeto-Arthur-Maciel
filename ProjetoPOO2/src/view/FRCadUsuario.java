@@ -6,6 +6,7 @@
 package view;
 
 import controller.UsuarioController;
+import java.awt.event.KeyEvent;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import model.Usuario;
@@ -52,6 +53,7 @@ public class FRCadUsuario extends javax.swing.JDialog {
         txtConfirmaSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Consulta de Usuários");
 
         painel.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -68,6 +70,11 @@ public class FRCadUsuario extends javax.swing.JDialog {
                 txtEmailActionPerformed(evt);
             }
         });
+        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtEmailKeyPressed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Nome");
@@ -75,6 +82,11 @@ public class FRCadUsuario extends javax.swing.JDialog {
         txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeActionPerformed(evt);
+            }
+        });
+        txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNomeKeyPressed(evt);
             }
         });
 
@@ -86,14 +98,29 @@ public class FRCadUsuario extends javax.swing.JDialog {
                 txtSenhaActionPerformed(evt);
             }
         });
+        txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSenhaKeyPressed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Data de Nascimento");
 
         ckbAtivo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ckbAtivo.setText("Ativo");
+        ckbAtivo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ckbAtivoKeyPressed(evt);
+            }
+        });
 
         txtDataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        txtDataNasc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDataNascKeyPressed(evt);
+            }
+        });
 
         btSalvar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/salvar.png"))); // NOI18N
@@ -124,6 +151,11 @@ public class FRCadUsuario extends javax.swing.JDialog {
         txtConfirmaSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtConfirmaSenhaActionPerformed(evt);
+            }
+        });
+        txtConfirmaSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtConfirmaSenhaKeyPressed(evt);
             }
         });
 
@@ -257,6 +289,42 @@ public class FRCadUsuario extends javax.swing.JDialog {
             this.dispose();
         }
     }//GEN-LAST:event_btSalvarMouseClicked
+
+    private void txtNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            txtEmail.requestFocus();
+        }
+    }//GEN-LAST:event_txtNomeKeyPressed
+
+    private void txtEmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            txtSenha.requestFocus();
+        }
+    }//GEN-LAST:event_txtEmailKeyPressed
+
+    private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSenhaKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            txtConfirmaSenha.requestFocus();
+        }
+    }//GEN-LAST:event_txtSenhaKeyPressed
+
+    private void txtConfirmaSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfirmaSenhaKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            txtDataNasc.requestFocus();
+        }
+    }//GEN-LAST:event_txtConfirmaSenhaKeyPressed
+
+    private void txtDataNascKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataNascKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            ckbAtivo.requestFocus();
+        }
+    }//GEN-LAST:event_txtDataNascKeyPressed
+
+    private void ckbAtivoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ckbAtivoKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            btSalvarMouseClicked(null);
+        }
+    }//GEN-LAST:event_ckbAtivoKeyPressed
 
     private boolean verificaCampos(){
         if(txtNome.getText().equals("")){
