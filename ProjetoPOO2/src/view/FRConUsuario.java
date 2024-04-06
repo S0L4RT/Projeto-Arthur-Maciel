@@ -8,6 +8,7 @@ package view;
 import controller.UsuarioController;
 import javax.swing.table.DefaultTableModel;
 import model.Usuario;
+import utils.Utils;
 
 /**
  *
@@ -186,11 +187,11 @@ public class FRConUsuario extends javax.swing.JDialog {
         DefaultTableModel modelo = (DefaultTableModel) tbUsuario.getModel();
         modelo.setNumRows(0);
         UsuarioController controller = new UsuarioController();
-        for(Usuario usu : controller.redFordesc(cbFiltro.getSelectedIndex(),txtFiltro.getText())){
+        for(Usuario usu : controller.readForDesc(cbFiltro.getSelectedIndex(),txtFiltro.getText())){
             Object[] linha = {usu.getPkUsuario()
                     , usu.getNome()
                     , usu.getEmail()
-                    , usu.getDataNasc()
+                    , Utils.converterDateToString(usu.getDataNasc())
                     , usu.ativoToString()};
             modelo.addRow(linha);
         }

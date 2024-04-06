@@ -33,11 +33,11 @@ public class FRMenu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         Cad = new javax.swing.JMenu();
-        MiCadusuario = new javax.swing.JMenuItem();
+        MiCadUsuario = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         MiSair = new javax.swing.JMenuItem();
-        MiConUsuario = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        MiCon = new javax.swing.JMenu();
+        MiConUsuario = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
@@ -75,13 +75,13 @@ public class FRMenu extends javax.swing.JFrame {
             }
         });
 
-        MiCadusuario.setText("Usuário");
-        MiCadusuario.addActionListener(new java.awt.event.ActionListener() {
+        MiCadUsuario.setText("Usuário");
+        MiCadUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MiCadusuarioActionPerformed(evt);
+                MiCadUsuarioActionPerformed(evt);
             }
         });
-        Cad.add(MiCadusuario);
+        Cad.add(MiCadUsuario);
 
         jMenuItem3.setText("???");
         Cad.add(jMenuItem3);
@@ -91,20 +91,25 @@ public class FRMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(Cad);
 
-        MiConUsuario.setText("Consulta");
-
-        jMenuItem5.setText("Usuário");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        MiCon.setText("Consulta");
+        MiCon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                MiConActionPerformed(evt);
             }
         });
-        MiConUsuario.add(jMenuItem5);
+
+        MiConUsuario.setText("Usuário");
+        MiConUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MiConUsuarioActionPerformed(evt);
+            }
+        });
+        MiCon.add(MiConUsuario);
 
         jMenuItem7.setText("???");
-        MiConUsuario.add(jMenuItem7);
+        MiCon.add(jMenuItem7);
 
-        jMenuBar1.add(MiConUsuario);
+        jMenuBar1.add(MiCon);
 
         setJMenuBar(jMenuBar1);
 
@@ -126,17 +131,21 @@ public class FRMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    private void MiConUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MiConUsuarioActionPerformed
+        new FRConUsuario(this, rootPaneCheckingEnabled).setVisible(true);
+    }//GEN-LAST:event_MiConUsuarioActionPerformed
 
     private void CadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadActionPerformed
         this.dispose();
     }//GEN-LAST:event_CadActionPerformed
 
-    private void MiCadusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MiCadusuarioActionPerformed
+    private void MiCadUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MiCadUsuarioActionPerformed
         new FRCadUsuario(this, rootPaneCheckingEnabled).setVisible(true);
-    }//GEN-LAST:event_MiCadusuarioActionPerformed
+    }//GEN-LAST:event_MiCadUsuarioActionPerformed
+
+    private void MiConActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MiConActionPerformed
+        
+    }//GEN-LAST:event_MiConActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,14 +184,14 @@ public class FRMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Cad;
-    private javax.swing.JMenuItem MiCadusuario;
-    private javax.swing.JMenu MiConUsuario;
+    private javax.swing.JMenuItem MiCadUsuario;
+    private javax.swing.JMenu MiCon;
+    private javax.swing.JMenuItem MiConUsuario;
     private javax.swing.JMenuItem MiSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
