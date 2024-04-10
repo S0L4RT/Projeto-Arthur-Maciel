@@ -234,6 +234,7 @@ public class FRConUsuario extends javax.swing.JDialog {
             telaUPD.carregarUsuario();
             telaUPD.setVisible(true);
         }
+        pesquisar();
     }//GEN-LAST:event_btnAlterarMouseClicked
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed

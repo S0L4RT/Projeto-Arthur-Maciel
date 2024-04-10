@@ -8,8 +8,13 @@ package view;
 import controller.UsuarioController;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import static java.lang.Integer.parseInt;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import model.GerenciadorConexao;
 import model.Usuario;
 import utils.Utils;
 
@@ -62,11 +67,11 @@ public class FRUPDUsuario extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         ckbAtivo = new javax.swing.JCheckBox();
         txtDataNasc = new javax.swing.JFormattedTextField();
-        btSalvar = new javax.swing.JButton();
+        btExcluir = new javax.swing.JButton();
         btCancelar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         txtConfirmaSenha = new javax.swing.JPasswordField();
-        btSalvar1 = new javax.swing.JButton();
+        btSalvar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         btnAlterarSenha = new javax.swing.JButton();
@@ -144,17 +149,17 @@ public class FRUPDUsuario extends javax.swing.JDialog {
             }
         });
 
-        btSalvar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/removerG.png"))); // NOI18N
-        btSalvar.setText("Excluir");
-        btSalvar.addMouseListener(new java.awt.event.MouseAdapter() {
+        btExcluir.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/removerG.png"))); // NOI18N
+        btExcluir.setText("Excluir");
+        btExcluir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btSalvarMouseClicked(evt);
+                btExcluirMouseClicked(evt);
             }
         });
-        btSalvar.addActionListener(new java.awt.event.ActionListener() {
+        btExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSalvarActionPerformed(evt);
+                btExcluirActionPerformed(evt);
             }
         });
 
@@ -183,17 +188,17 @@ public class FRUPDUsuario extends javax.swing.JDialog {
             }
         });
 
-        btSalvar1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btSalvar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/salvar.png"))); // NOI18N
-        btSalvar1.setText("Salvar");
-        btSalvar1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btSalvar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/salvar.png"))); // NOI18N
+        btSalvar.setText("Salvar");
+        btSalvar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btSalvar1MouseClicked(evt);
+                btSalvarMouseClicked(evt);
             }
         });
-        btSalvar1.addActionListener(new java.awt.event.ActionListener() {
+        btSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSalvar1ActionPerformed(evt);
+                btSalvarActionPerformed(evt);
             }
         });
 
@@ -257,9 +262,9 @@ public class FRUPDUsuario extends javax.swing.JDialog {
                                 .addComponent(btnAlterarSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addContainerGap())))
                     .addGroup(painelLayout.createSequentialGroup()
-                        .addComponent(btSalvar)
+                        .addComponent(btExcluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btSalvar1)
+                        .addComponent(btSalvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
@@ -279,7 +284,7 @@ public class FRUPDUsuario extends javax.swing.JDialog {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -293,8 +298,8 @@ public class FRUPDUsuario extends javax.swing.JDialog {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnAlterarSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
+                    .addComponent(btnAlterarSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(txtSenha))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -307,9 +312,9 @@ public class FRUPDUsuario extends javax.swing.JDialog {
                     .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btSalvar1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -321,10 +326,7 @@ public class FRUPDUsuario extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(painel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -372,35 +374,21 @@ public class FRUPDUsuario extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtDataNascKeyPressed
 
-    private void btSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSalvarMouseClicked
-        // Verificar campos
-        if(verificaCampos() == false){
-            return;
-        }
+    private void btExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btExcluirMouseClicked
+        
         // Salvar no banco de dados
         Usuario usu = new Usuario();
-        usu.setNome(txtCodigo.getText());
-        usu.setEmail(txtEmail.getText());
-        usu.setSenha(new String(txtSenha.getPassword()));
-        usu.setAtivo(ckbAtivo.isSelected());
-
-        String senha = new String(txtSenha.getPassword());
-        senha = Utils.calcularMD5(senha);
-        usu.setSenha(senha);
-        usu.setAtivo(ckbAtivo.isSelected());
-
-        Date data = Utils.converterStringToDate(txtDataNasc.getText());
-        usu.setDataNasc(data);
+        usu.setPkUsuario(parseInt(txtCodigo.getText()));
 
         UsuarioController controller = new UsuarioController();
-        if(controller.adicionarUsuario(usu)){
+        if(controller.excluirUsuario(usu)){
             this.dispose();
         }
-    }//GEN-LAST:event_btSalvarMouseClicked
+    }//GEN-LAST:event_btExcluirMouseClicked
 
-    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
+    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btSalvarActionPerformed
+    }//GEN-LAST:event_btExcluirActionPerformed
 
     private void btCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btCancelarMouseClicked
         this.dispose();
@@ -416,13 +404,43 @@ public class FRUPDUsuario extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtConfirmaSenhaKeyPressed
 
-    private void btSalvar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSalvar1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btSalvar1MouseClicked
+    private void btSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSalvarMouseClicked
+        // Verificar campos
+        if(verificaCampos() == false){
+            return;
+        }
+        // Salvar no banco de dados
+        Usuario usu = new Usuario();
+        usu.setNome(txtNome.getText());
+        usu.setEmail(txtEmail.getText());
+        usu.setSenha(new String(txtSenha.getPassword()));
+        usu.setAtivo(ckbAtivo.isSelected());
+        usu.setPkUsuario(parseInt(txtCodigo.getText()));
+        
+        String senha = "";
+        if(txtSenha.isEditable()){
+            senha = new String(txtSenha.getPassword());
+            senha = Utils.calcularMD5(senha);
+        }else{
+            senha = new String(txtSenha.getPassword());
+        }
+        usu.setSenha(senha);
+        usu.setAtivo(ckbAtivo.isSelected());
+        
+        Date data = Utils.converterStringToDate(txtDataNasc.getText());
+        usu.setDataNasc(data);
+        
+        UsuarioController controller = new UsuarioController();
+        if(controller.salvarAlteracoes(usu)){
+            this.dispose();
+        }
+        
+        
+    }//GEN-LAST:event_btSalvarMouseClicked
 
-    private void btSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvar1ActionPerformed
+    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btSalvar1ActionPerformed
+    }//GEN-LAST:event_btSalvarActionPerformed
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
         // TODO add your handling code here:
@@ -465,7 +483,7 @@ public class FRUPDUsuario extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Campo 'Nome' em branco");
             return false;
         }
-        if(!txtCodigo.getText().matches("^[\\p{L} ]+$")){
+        if(!txtNome.getText().matches("^[\\p{L} ]+$")){
             JOptionPane.showMessageDialog(null, "Campo 'Nome' possui caracteres inválidos");
             return false;
         }
@@ -497,8 +515,9 @@ public class FRUPDUsuario extends javax.swing.JDialog {
         Usuario usu = controller.readForPk(pkUsuario);
                 
         String codigo = String.valueOf(usu.getPkUsuario());
-        // txtCodigo.setText(codigo);
-        txtCodigo.setText(usu.getNome());
+        txtCodigo.setText(codigo);
+        
+        txtNome.setText(usu.getNome());
         txtEmail.setText(usu.getEmail());
         txtDataNasc.setText(Utils.converterDateToString(usu.getDataNasc()));
         txtSenha.setText(usu.getSenha());
@@ -507,6 +526,7 @@ public class FRUPDUsuario extends javax.swing.JDialog {
         ckbAtivo.setSelected(usu.isAtivo());
     }
 
+    
     /**
      * @param args the command line arguments
      */
@@ -551,8 +571,8 @@ public class FRUPDUsuario extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancelar;
+    private javax.swing.JButton btExcluir;
     private javax.swing.JButton btSalvar;
-    private javax.swing.JButton btSalvar1;
     private javax.swing.JButton btnAlterarSenha;
     private javax.swing.JCheckBox ckbAtivo;
     private javax.swing.JLabel jLabel1;
