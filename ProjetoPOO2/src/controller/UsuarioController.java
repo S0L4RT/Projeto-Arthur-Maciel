@@ -51,4 +51,22 @@ public class UsuarioController {
         }
         return usu;
     }
+    
+    public boolean salvarAlteracoes(Usuario usua){
+        if(usuarioDAO.salvarAlteracoes(usua)){
+            return true;
+        }else{
+            JOptionPane.showMessageDialog(null, "Usuário não alterado");
+            return false;
+        }
+    }
+    
+    public boolean excluirUsuario(Usuario usua){
+        if(usuarioDAO.excluirUsuario(usua)){
+            return true;
+        }else{
+            JOptionPane.showMessageDialog(null, "Usuário não excluído");
+            return false;
+        }
+    }
 }
