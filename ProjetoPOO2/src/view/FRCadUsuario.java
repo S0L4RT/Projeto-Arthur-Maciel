@@ -24,6 +24,7 @@ public class FRCadUsuario extends javax.swing.JDialog {
     public FRCadUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
