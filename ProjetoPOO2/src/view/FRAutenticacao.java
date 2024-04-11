@@ -21,6 +21,7 @@ public class FRAutenticacao extends javax.swing.JFrame {
      */
     public FRAutenticacao() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
