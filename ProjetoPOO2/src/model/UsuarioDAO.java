@@ -1,6 +1,7 @@
 
 package model;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import utils.Utils;
 
 
 public class UsuarioDAO {
@@ -38,23 +40,25 @@ public class UsuarioDAO {
     }
     
     public boolean adicionarUsuario(Usuario u){
-        String sql = "INSERT into TBUSUARIO (nome, email, senha, dataNasc, ativo) VALUES (?,?,?,?,?)";
+        String sql = "INSERT into TBUSUARIO (nome, email, senha, dataNasc, ativo, imagem) VALUES (?,?,?,?,?,?)";
         
         GerenciadorConexao gerenciador = new GerenciadorConexao();
         Connection con = gerenciador.getConexao();
         PreparedStatement stmt = null;
         
         try{
+            byte[] iconBytes = Utils.iconToBytes(u.getImagem());
             stmt = con.prepareStatement(sql);
             stmt.setString(1, u.getNome());
             stmt.setString(2, u.getEmail());
             stmt.setString(3, u.getSenha());
             stmt.setDate(4, new java.sql.Date(u.getDataNasc().getTime()));
             stmt.setBoolean(5, u.isAtivo());
+            stmt.setBytes(6, iconBytes);
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Usuário: " + u.getNome() + " inserido com sucesso!");
             return true;
-        } catch(SQLException e){
+        } catch(SQLException | IOException e){
             JOptionPane.showMessageDialog(null,"Erro: " + e.getMessage());
         }finally{
             gerenciador.closeConnection(stmt);
